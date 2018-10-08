@@ -22,7 +22,7 @@ class App extends React.Component{
                     alignItems="stretch">
                     <Grid item container xs className="header">
                             <NavBar />
-                            <DateTimeline />
+                            <DateTimeline/>
                     </Grid>
                     <Grid item xs>
                         <h1>This is lower grid</h1>

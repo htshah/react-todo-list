@@ -3,6 +3,11 @@ import { Typography, withStyles } from "@material-ui/core";
 import DayComponent from "./DayComponent";
 
 const style = {
+    monthContainer:{
+        '&:not(:first-child)':{
+            marginLeft: "15px",
+        }
+    },
     monthTitle: {
         display: "block",
         position: "sticky",
@@ -19,10 +24,19 @@ const style = {
 }
 
 class MonthComponent extends Component{
+
+    shouldComponentUpdate = (nextProps) => {
+        const {current,target} = this.props;
+        return (
+            current.getMonth() === nextProps.target.getMonth() ||
+            current.getMonth() === target.getMonth()
+        );
+
+    }
     
     renderDays() {
         let days = [];
-        const {current} = this.props;
+        const {current,target,onDateSelect} = this.props;
     
         for(let i=1;i<=31;i++){
             let date = new Date(current.toString());
@@ -30,10 +44,14 @@ class MonthComponent extends Component{
             if(date.getMonth() !== current.getMonth()){
                 break;
             }
+            const isTargetDate = date.toDateString() === target.toDateString();
             days.push(
                 <DayComponent
+                    key={i}
+                    {...(isTargetDate && {ref: this.props.dateRef})}
                     current={date}
-                    target={this.props.target}/>
+                    target={target}
+                    onDateSelect={onDateSelect}/>
             );
         }
         return <Fragment>{days}</Fragment>;
@@ -47,7 +65,7 @@ class MonthComponent extends Component{
             'November', 'December'
         ];
         return (
-            <div className="month-container">
+            <div className={this.props.classes.monthContainer+" month-container"}>
                 <Typography
                     variant="caption" 
                     className={this.props.classes.monthTitle}>
