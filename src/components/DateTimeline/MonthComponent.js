@@ -25,11 +25,16 @@ const style = {
 
 class MonthComponent extends Component{
 
-    shouldComponentUpdate = (nextProps) => {
+    getDateString = (date) =>{
+        return `${date.getFullYear()}${date.getMonth()}`;
+    }
+
+    shouldComponentUpdate = ({target: newTarget}) => {
         const {current,target} = this.props;
         return (
-            current.getMonth() === nextProps.target.getMonth() ||
-            current.getMonth() === target.getMonth()
+            current.getFullYear() !== newTarget.getFullYear() ||
+            current.getMonth() === newTarget.getMonth() ||
+            this.getDateString(current) === this.getDateString(target)
         );
 
     }

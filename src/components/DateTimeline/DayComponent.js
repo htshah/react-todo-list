@@ -39,6 +39,7 @@ class DayComponent extends Component {
     shouldComponentUpdate = ({current,target}) =>{
         const {current: oldCurrent,target: oldTarget} = this.props;
         return (
+            oldCurrent.getFullYear() !== target.getFullYear() ||
             current.toDateString() === target.toDateString() ||
             oldCurrent.toDateString() === oldTarget.toDateString()
         );
