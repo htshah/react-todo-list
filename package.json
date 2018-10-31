@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.1.2",
+    "date-fns": "^2.0.0-alpha.22",
+    "material-ui-pickers": "^1.0.0-rc.17",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-materialize": "^2.4.6",
     "react-overflow-scrolling": "^0.1.5",
     "react-scripts": "2.0.3"
   },
